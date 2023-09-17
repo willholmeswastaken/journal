@@ -12,7 +12,7 @@ export default function Home() {
             The open-source personal daily journal that everyone can use.
           </h1>
           <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-            Having access to a quality, private journal is something that
+            Having access to a quality and easy to use journal is something that
             we believe everyone should have access to.
           </p>
           <div className="space-x-4">

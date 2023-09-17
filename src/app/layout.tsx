@@ -3,7 +3,6 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { cn } from '@/lib/utils'
-import { MobileNav } from '@/components/mobile-nav'
 import { SiteFooter } from '@/components/site-footer'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -25,7 +24,6 @@ export default function RootLayout({
           <header className="container z-40 bg-background">
             <div className="flex h-20 items-center justify-between py-6">
               <MainNav />
-              <MobileNav />
             </div>
           </header>
         </div>

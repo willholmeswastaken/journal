@@ -1,21 +1,22 @@
 'use client'
 
 import Link from "next/link"
+import { signIn, signOut } from "next-auth/react"
 
 import { cn } from "@/lib/utils"
 import { useState } from "react"
 import { Button, buttonVariants } from "./ui/button"
+import { getCurrentUser } from "@/lib/session"
+import { UnwrapPromise } from "@/types/unwrap-promise"
 
 export function MainNav({
-    className,
-    ...props
-}: React.HTMLAttributes<HTMLElement>) {
-    const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false)
+    user
+}: { user: UnwrapPromise<ReturnType<typeof getCurrentUser>> }) {
+    const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
     return (
         <>
             <nav
-                className={cn("hidden md:flex justify-between w-full items-center", className)}
-                {...props}
+                className={cn("hidden md:flex justify-between w-full items-center")}
             >
                 <div className="flex flex-row gap-6 md:gap-10">
                     <Link
@@ -49,19 +50,34 @@ export function MainNav({
                         Settings
                     </Link>
                 </div>
-                <Link
-                    href="/login"
-                    className={cn(
-                        buttonVariants({ variant: "secondary", size: "sm" }),
-                        "px-4",
-                    )}
-                >
-                    Login
-                </Link>
-            </nav>
+                {
+                    user !== undefined ?
+                        (
+                            <Button
+                                onClick={() => signOut()}
+                                className={cn(
+                                    buttonVariants({ variant: "secondary", size: "sm" }),
+                                    "px-4",
+                                )}
+                            >
+                                Logout
+                            </Button>
+                        )
+                        : (<Button
+                            onClick={() => signIn('github')}
+                            className={
+                                cn(
+                                    buttonVariants({ variant: "secondary", size: "sm" }),
+                                    "px-4",
+                                )}
+                        >
+                            Login
+                        </Button>)
+                }
+
+            </nav >
             <nav
-                className={cn("flex md:hidden justify-between w-full gap-y-6", className)}
-                {...props}
+                className={cn("flex md:hidden justify-between w-full gap-y-6")}
             >
                 <Button
                     className={cn("text-sm font-bold transition-colors hover:text-primary inline-flex items-center justify-center z-100",

@@ -21,14 +21,12 @@ export default async function RootLayout({
   const user = await getCurrentUser();
   return (
     <html lang="en">
-      <body className={cn('min-h-screen dark bg-background font-sans antialiased', inter.className)}>
-        <div className="flex flex-col">
-          <header className="container z-40 bg-background">
-            <div className="flex h-20 items-center justify-between py-6">
-              <MainNav user={user} />
-            </div>
-          </header>
-        </div>
+      <body className={cn('min-h-screen dark bg-background font-sans antialiased flex flex-col justify-between', inter.className)}>
+        <header className="container z-40 bg-background">
+          <div className="flex h-20 items-center justify-between py-6">
+            <MainNav user={user} />
+          </div>
+        </header>
         {children}
 
         <SiteFooter />
